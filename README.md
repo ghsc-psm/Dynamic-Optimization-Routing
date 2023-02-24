@@ -47,7 +47,7 @@ To run locally:
 
 5. Ensure `country_cfg.toml` is updated with information above:
 
-6. Ensure that you filling the COUNTRY_DRT_Files.xlsx` and have all the DRT files directly in the `data/COUNTRY` folder.
+6. Ensure that you filling the `COUNTRY_DRT_Files.xlsx` and have all the DRT files directly in the `data/COUNTRY` folder.
 
 7. Run the app in terminal!
     - `streamlit run app.py`
