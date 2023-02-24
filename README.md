@@ -24,7 +24,8 @@ For `dro_specs` and `baseline`, list either `True` or `False` for the specific o
 Prior to running, it is essential to verify the following:
 
 1. There exists a folder in `./data` that matches the country name specified in `country_cfg.toml` with the first letter of each word captialized. This folder should be modeled after the sample `./data/COUNTRY/` folder
-2. All files in folder specified above are accurate; this includes the `warehouse_mapping.json` file.
+2. Ensure the following tables are filled out, Facility, Distance, Time, Fleet, and Fleet Exclusions.
+3. All files in folder specified above are accurate; this includes the `warehouse_mapping.json` file.
 
 ## How to Run Standard Delivery Route Optimizer
 
@@ -46,7 +47,7 @@ To run locally:
 
 5. Ensure `country_cfg.toml` is updated with information above:
 
-6. Ensure that you unzip the file `Kenya_DRT_Files.zip` and have all the DRT files directly in the `data/Kenya` folder.
+6. Ensure that you filling the COUNTRY_DRT_Files.xlsx` and have all the DRT files directly in the `data/COUNTRY` folder.
 
 7. Run the app in terminal!
     - `streamlit run app.py`
