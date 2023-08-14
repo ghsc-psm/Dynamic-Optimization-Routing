@@ -64,6 +64,11 @@ def read_scenario(scenario_file, ver=0):
         scenario_data['Order Details'] = pd.read_excel(scenario_file, sheet_name="Order Details")
         scenario_data['Order Details']['Customer ID'] = scenario_data['Order Details']['Customer ID'].apply(lambda c: str(c)[:8])
 
+    facility_DF=scenario_data["Facility_DF"]
+    facility_DF['orig_route'] = None
+    for i, r in facility_DF.iterrows():
+        facility_DF.at[i,'orig_route'] = scenario_data["Deliveries"][scenario_data["Deliveries"]['Dispatch Destination'] == r['facility']].Route.drop_duplicates().to_list()
+    scenario_data["Facility_DF"]=facility_DF
     return scenario_data
 
 
@@ -199,9 +204,7 @@ def initialize_scenario(session_state, facilities):
 
         dispatch_df = scenario_data["Deliveries"].groupby(['Dispatch Destination']).agg({'Loading Weight':'sum', 'Loading Volume':'sum'}).reset_index()
         dispatch_df.columns = ['facility', 'weight', 'vol']
-        dispatch_df['orig_route'] = None
-        for i, r in dispatch_df.iterrows():
-            dispatch_df.at[i,'orig_route'] = scenario_data["Deliveries"][scenario_data["Deliveries"]['Dispatch Destination'] == r['facility']].Route.drop_duplicates().to_list()
+        
         facility_DF = facility_DF.merge(dispatch_df, on='facility', how="left")
         facility_DF = facility_DF[facility_DF.facility.isin(facilities + [session_state.warehouse])]
         facility_DF.to_csv('./data/tester.csv')
@@ -222,6 +225,9 @@ def initialize_scenario(session_state, facilities):
     time_DF = time_DF.reset_index(drop=True)
 
     facility_ids = set(facility_DF['facility_id'].to_list())
+    facility_DF['orig_route'] = None
+    for i, r in facility_DF.iterrows():
+        facility_DF.at[i,'orig_route'] = scenario_data["Deliveries"][scenario_data["Deliveries"]['Dispatch Destination'] == r['facility']].Route.drop_duplicates().to_list()
     facility_DF = facility_DF[facility_columns + ["vol", "weight", "orig_route"]]
     facility_DF = facility_DF.set_index("facility_id")
     

@@ -79,7 +79,7 @@ def draw_route_in_map(m, route_detail, color="black", line_style="solid", draw_r
                       ).add_to(m)
 
         if draw_routes:
-            TOKEN = 
+            TOKEN = 'pk.eyJ1IjoiZGFzaGFzYXZpbmEiLCJhIjoiY2tjemVseHY0MDJ5YTJybXRqOWV3ZzY4eSJ9.kJJ10O9yEsg8xoCn2Wo1Lw'
             service = Directions(access_token=TOKEN)
 
             origin = {

@@ -4,8 +4,7 @@
 
 1. Standard Delivery Route Optimizer
 2. Fleet Restriction Generation Template and Script
-3. Batch Processing Script for seperated DRT and Order Evaluation Template files
-4. Truck Assignment Optimization to ensure most optimal truck assignments (Posthoc Analysis; Ensures Optimal Assignment for Predefined_Routes)
+3. Truck Assignment Optimization to ensure most optimal truck assignments (Posthoc Analysis; Ensures Optimal Assignment for Predefined_Routes)
 
 ## Setting Configurations for VRP Optimizer
 
@@ -24,8 +23,7 @@ For `dro_specs` and `baseline`, list either `True` or `False` for the specific o
 Prior to running, it is essential to verify the following:
 
 1. There exists a folder in `./data` that matches the country name specified in `country_cfg.toml` with the first letter of each word captialized. This folder should be modeled after the sample `./data/COUNTRY/` folder
-2. Ensure the following tables are filled out, Facility, Distance, Time, Fleet, and Fleet Exclusions.
-3. All files in folder specified above are accurate; this includes the `warehouse_mapping.json` file.
+2. All files in folder specified above are accurate; this includes the `warehouse_mapping.json` file.
 
 ## How to Run Standard Delivery Route Optimizer
 
@@ -39,6 +37,8 @@ To run locally:
 
     Note: Once the virtual environment is created, the environment must be activated each time starting a new session.
 
+    Note: A conda environment can also be used if preferred.
+
 3. Install all requirements: 
     - `pip install -r requirements.txt`
     - Go into the lib folder and install psm library: `pip install psm-X.X.X-py3-none-any.whl`
@@ -47,10 +47,47 @@ To run locally:
 
 5. Ensure `country_cfg.toml` is updated with information above:
 
-6. Ensure that you filling the `COUNTRY_DRT_Files.xlsx` and have all the DRT files directly in the `data/COUNTRY` folder.  This data structure is based on Google OR Tools required format for further details refer to `https://developers.google.com/optimization/routing`
+6. Ensure that you unzip the file `{Country}_DRT_Files.zip` and have all the DRT files directly in the `data/{Country}` folder. More information on how to complete this file below.
 
 7. Run the app in terminal!
     - `streamlit run app.py`
+
+## Filling out Order Evaluation Template
+
+For this file, the Order Details Tab should be populated first with the order line information. For this sheet, be sure to first unhide all of the columns in order to show all fields. Once this is done. This sheet will be crucial for filling out the Order Info and Delivery Sheets in the document. For the Order Info sheet, the Order Details sheet should be aggregated based on Customer Order Number/Customer Name to get information on the total volume for the order. This will be achieved by using UNIQUE(), VLOOKUP(), and SUMIF() functions based in excel. Once this sheet is complete, the Delivery sheet can be populated using the Order Info. For this sheet, the route field needs to be filled out for the specific customer names as appropriate (this field is critical for the predefined routes functionality). Also note that the loading weight is typically set to 1. This is because volume typically is the limiting factor for these dispatches. Based on this, the volumetric data should be populated. With this, now fill out the Facility Ref sheet. The Parameters sheet does not need to be populated. 
+
+
+## Filling out DRT Files
+
+Filling out the DRT Files, the following sheets need to be complete: Facility, Links, Distance, Time , Cubage, Fleet, Fleet Excusions, Facility Groups Distance Adj and Parameters.
+
+- For the Facility Sheet, fill out all of the fields in the table, be sure that a warehouse listed in the warehouse_mapping json file is listed in the first row of the facility table.
+
+![Sample Mapping](./images/README_warehousemapping.png)
+
+*Note: The name used on the left must match with the location in the DRT file name, and the name on the right must be a facility sheet.
+
+- For the Links sheet (optional), this can contain information for how the distance matrix was used. **This is not needed for the optimization.**
+
+- For the Distance Sheet, insert a distance matrix. At GHSC-PSM, the distance matrix from the zambia-matrix-management document can be used.
+
+![Sample Distance Matrix](./images/README_distancematrix.png)
+
+- For the Time Sheet, simply copy over the matrix from the distance sheet and divide all values by the speed assumption for the analysis.
+
+- For the Cubage Sheet (optional), list record of the product codes and names with associated volumes for record keeping.
+
+- For the Fleet Sheet, list all of the trucks available with its source (warehouse) location and note associated constraints and costs associated with the fleet. Note: base_cost is a fixed price for distance travelled where as fixed_cost is a flat cost applied to the total.
+
+- For the Fleet Exclusions Sheet, list trucks and source location in addition to which locations the trucks cannot go, these will be loaded into the DRO app but can be toggled in the app itself.
+
+- For the Facility Groups Sheet (optional), allows for specific facilities to be delivered to in same dispatch.
+
+- For the Distance Adj Sheet (optional), allows for specific facility adjacencies to be specified for two facilities (i.e. from one to another and the distance).
+
+- For the Parameters Sheet (optional), set the parameters that you want to be autopopulated into the solve scenario component of the DRO application,
+
+
 
 ## Replicating Predefined Routes
 
@@ -68,14 +105,6 @@ Open `fleet_exclusion.py` in VSCode and update `fname` (located at the bottom of
 `python fleet_exclusion.py`
 
 This will create a new xlsx file. The first sheet in the workbook can be copied into the DRT Fleet Restriction sheet. The second sheet contains quality checks to ensure that the volume at the facility is not greater than the volume capacity of the largest vehicle that can get to the facility. This check is to ensure that the DRO Optimizer does not encounter problems when working to produce optimization results.
-
-## Running the Batch Optimize Process:
-
-To run the batch optimization, run the following command:
-
-`streamlit run batch_process.py`
-
-This will launch a streamlit page that appears similar to the app.py page. The key difference stems from the fact that you are able to upload multiple DRT and Order Evaluation Template Files. In fact, for each DRT file added, you can add one or more Order Evaluation Template files to optimize. Once the DRT and Order Evaluation Template file(s) are uploaded, select `Confirm DRT and Order Evaluation Template File Selection`. Once this is done, the selected files will be listed below in the `Selected DRT and Order Evaluation Template Files for optimization` section. More DRT and Order Evaluation Template files can be added and commited in a similar manner. If there is a mistake in the uploaded files, select `Clear all Optimizations Previously Selected` and reupload files to process. Once ready to run the Optimizations, select the `Confirm files for optimization` button and the app will display the optimization parameters and have an option to run the optimization similar to the `app.py` application. Note: The Parameters specified in the DRT file will take priority over any parameters manually set in the application when the optimization is running.
 
 ## Running the Truck Optimization Process:
 

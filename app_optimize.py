@@ -531,7 +531,7 @@ def preprocessing_for_dro_data(i, scenario, predefined_routes):
     """    
 
     # Preparing the scenario based on the predefined route
-    subsetted_routes = [True if str(r['orig_route']) == 'nan' or predefined_routes[i] in str(r['orig_route']).upper() else False for _, r in scenario["Facility_DF"].iterrows()]
+    subsetted_routes = [True if str(r['orig_route']) == 'nan'or r['type'].lower() =='warehouse' or predefined_routes[i] in str(r['orig_route']).upper() else False for _, r in scenario["Facility_DF"].iterrows()]
     subsetted_indexes = [i for i in range(len(subsetted_routes)) if subsetted_routes[i]]
     scenario["Facility_DF"] = scenario["Facility_DF"][subsetted_routes] 
     scenario['Deliveries'] = scenario['Deliveries'][scenario['Deliveries']['Route'].astype(str).str.upper() == predefined_routes[i]]
