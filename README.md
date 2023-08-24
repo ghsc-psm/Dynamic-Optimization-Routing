@@ -69,7 +69,7 @@ Filling out the DRT Files, the following sheets need to be complete: Facility, L
 
 - For the Links sheet (optional), this can contain information for how the distance matrix was used. **This is not needed for the optimization.**
 
-- For the Distance Sheet, insert a distance matrix. At GHSC-PSM, the distance matrix from the zambia-matrix-management document can be used.
+- For the Distance Sheet, insert a distance matrix. At GHSC-PSM, the distance matrix we have a internal-matrix-management document can be used.  For others This will need to generated using existing matrix or built via tools like [Open Route Service](https://openrouteservice.org/). In particular, [Open Route Services Matrix API](https://openrouteservice.org/dev/#/api-docs/v2/matrix) calls enable users to get the distance from one location to all other locations quickly. These calls can then be stacked to populate the full distance matrix. 
 
 ![Sample Distance Matrix](./images/README_distancematrix.png)
 
