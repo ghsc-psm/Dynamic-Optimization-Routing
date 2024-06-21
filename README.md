@@ -6,26 +6,7 @@
 2. Fleet Restriction Generation Template and Script
 3. Truck Assignment Optimization to ensure most optimal truck assignments (Posthoc Analysis; Ensures Optimal Assignment for Predefined_Routes)
 
-## Setting Configurations for VRP Optimizer
-
-Prior to running the streamlit application, configure `country_cfg.toml` with country specific information including:
-
-1. Country Name (country_name)
-2. Tool Display Name (tool_title)
-3. Currency (currency)
-
-For `drt_functionaility`, list either `True` or `False` next to each specific entry to enable or disable the particular functionality of the application when the app is run.
-
-For `dro_specs` and `baseline`, list either `True` or `False` for the specific optimization functionalities to either include or not include toggles for an optimization restriction to be customizable (i.e. allow users to constrain or not constrain based on specifc parameters in the application itself).
-
-## Important Checks Prior to Running any Solution
-
-Prior to running, it is essential to verify the following:
-
-1. There exists a folder in `./data` that matches the country name specified in `country_cfg.toml` with the first letter of each word captialized. This folder should be modeled after the sample `./data/COUNTRY/` folder
-2. All files in folder specified above are accurate; this includes the `warehouse_mapping.json` file.
-
-## How to Run Standard Delivery Route Optimizer
+## How to Install and Run Standard Delivery Route Optimizer
 
 To run locally:
 
@@ -51,6 +32,25 @@ To run locally:
 
 7. Run the app in terminal!
     - `streamlit run app.py`
+
+## Setting Configurations for VRP Optimizer
+
+Prior to running the streamlit application, configure `country_cfg.toml` with country specific information including:
+
+1. Country Name (country_name)
+2. Tool Display Name (tool_title)
+3. Currency (currency)
+
+For `drt_functionaility`, list either `True` or `False` next to each specific entry to enable or disable the particular functionality of the application when the app is run.
+
+For `dro_specs` and `baseline`, list either `True` or `False` for the specific optimization functionalities to either include or not include toggles for an optimization restriction to be customizable (i.e. allow users to constrain or not constrain based on specifc parameters in the application itself).
+
+## Important Checks Prior to Running any Solution
+
+Prior to running, it is essential to verify the following:
+
+1. There exists a folder in `./data` that matches the country name specified in `country_cfg.toml` with the first letter of each word captialized. This folder should be modeled after the sample `./data/COUNTRY/` folder
+2. All files in folder specified above are accurate; this includes the `warehouse_mapping.json` file.
 
 ## Filling out Order Evaluation Template
 
