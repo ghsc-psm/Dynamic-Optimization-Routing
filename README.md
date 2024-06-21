@@ -10,7 +10,7 @@
 
 To run locally:
 
-1. Git clone the repository.
+1. Git clone or fork the repository. If you plan to make modifications and add to your own repository, you should fork the code.
 
 2. Create virtual environment and activate it
     - `python -m venv .venv`
