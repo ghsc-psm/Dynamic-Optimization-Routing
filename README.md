@@ -14,7 +14,8 @@ To run locally:
 
 2. Create virtual environment and activate it
     - `python -m venv .venv`
-    - `source .venv/Script/activate`
+    - `source .venv/Script/activate` (Linux) or `.venv/Scripts/activate`
+    - rename .venv to something less generic in both lines, like .dro-venv
 
     Note: Once the virtual environment is created, the environment must be activated each time starting a new session.
 
@@ -22,15 +23,15 @@ To run locally:
 
 3. Install all requirements: 
     - `pip install -r requirements.txt`
-    - Go into the lib folder and install psm library: `pip install psm-X.X.X-py3-none-any.whl`
+    - Go into the lib folder (`cd lib`) and install psm library: `pip install psm-X.X.X-py3-none-any.whl`
 
-4. Add a folder called `filestore`.
+4. Add a folder called `filestore` (if not already created).
 
-5. Ensure `country_cfg.toml` is updated with information above:
+5. Ensure `country_cfg.toml` is updated with information described in section below.
 
 6. Ensure that you unzip the file `{Country}_DRT_Files.zip` and have all the DRT files directly in the `data/{Country}` folder. More information on how to complete this file below.
 
-7. Run the app in terminal!
+7. Run the app in terminal! (make sure to return to the main folder if you're still in lib)
     - `streamlit run app.py`
 
 ## Setting Configurations for VRP Optimizer
