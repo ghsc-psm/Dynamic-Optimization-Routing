@@ -1,27 +1,27 @@
 
 [country]
 
-country_name = Kenya
+country_name = COUNTRY
 tool_title = 
-currency = KES
+currency = DOL
 
 [drt_functionality]
 
-Order Evaluation = 
+Order Evaluation = TRUE
 Dispatch Optimization = True
 Release Notes = True
 
 [dro_specs]
 
 Include Return Leg Cost = True
-Enforce Volume Capacity =
-Enforce Weight Capacity =
+Enforce Volume Capacity = True
+Enforce Weight Capacity = True
 Enforce Distance Limit = True
-Enforce Transit Time Limit =
-Enforce Delivery Time Limit =
+Enforce Transit Time Limit = True
+Enforce Delivery Time Limit = True
 Allow Missed Deliveries = True
-Optimization Runtime Limit =  True
-Adjust Transit Time by Speed =
+Optimization Runtime Limit = True
+Adjust Transit Time by Speed = True
 
 [baseline]
 predefined_routes = True

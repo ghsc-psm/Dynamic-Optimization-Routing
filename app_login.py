@@ -1,7 +1,7 @@
 import streamlit as st
 import configparser
 import re
-from psm.db import decrypt
+# from psm.db import decrypt
 
 def validate_password_format(password): 
     if len(password) > 6 and len(re.findall(r'[A-Z]', password)) > 0 and len(re.findall(r'[a-z]', password)) > 0 and len(re.findall(r'[0-9]', password)) > 0: 
@@ -35,8 +35,11 @@ def check_credentials(session_state):
         read_config = configparser.ConfigParser()
         read_config.read("credentials.ini")
         credentials_dict = dict()
-        for (usertype, password) in read_config.items("COUNTRY CREDENTIALS"):
-            credentials_dict[decrypt(password)] = usertype
+        # for (usertype, password) in read_config.items("COUNTRY CREDENTIALS"):
+        #     credentials_dict[decrypt(password)] = usertype
+
+        credentials_dict["Password1"] = "COUNTRY_admin"
+        credentials_dict["Password2"] = "COUNTRY_user"
 
         email_check, email = verify_emails(uname)
         if email_check:

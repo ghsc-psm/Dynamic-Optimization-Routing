@@ -34,7 +34,7 @@ def app_update_reference_data(session_state):
 
     with file_select:
         # get all files in data directory and process to include only correct format
-        data_path = './data/'
+        data_path = './data/COUNTRY'
         app_list = ['DRT', 'ALL', 'DRO']
         only_files = [f for f in listdir(data_path) if isfile(join(data_path, f))
                      and (len(f.split(' ')) >= 2) 
