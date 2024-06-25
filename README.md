@@ -23,7 +23,7 @@ To run locally:
 
 3. Install all requirements: 
     - `pip install -r requirements.txt`
-    - Go into the lib folder (`cd lib`) and install psm library: `pip install psm-X.X.X-py3-none-any.whl`
+    - Go into the lib folder (`cd lib`) and install psm library: `pip install psm-X.X.X-py3-none-any.whl`(replace the xs with the numbers seen in the filename).
 
 4. Add a folder called `filestore` (if not already created).
 
