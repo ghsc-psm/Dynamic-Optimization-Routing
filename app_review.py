@@ -130,12 +130,14 @@ def app_review(session_state):
         
         with col_map:
             """ Instantiate map with warehouse """
-            roads = st.checkbox('Display dispatches using road network (approximate)?', key='002')
+            # roads = st.checkbox('Display dispatches using road network (approximate)?', key='002')
             m = folium.Map(location = [scenario['Facility_DF'].iloc[0].latitude, scenario['Facility_DF'].iloc[0].longitude], zoom_start = 10)
             folium.Marker([scenario['Facility_DF'].iloc[0].latitude, scenario['Facility_DF'].iloc[0].longitude], tooltip = scenario['Facility_DF'].iloc[0].facility).add_to(m)
             for _, route in scenario['SolSummary_DF'].iterrows(): 
                 route_no = int(route['route'].split(' ')[-1])
-                m = draw_route_in_map(m, scenario['SolDetail_DF'][scenario['SolDetail_DF']["route"] == route["route"]], colors(route_no-1), "dash", roads)
+                m = draw_route_in_map(m, scenario['SolDetail_DF'][scenario['SolDetail_DF']["route"] == route["route"]], colors(route_no-1), "dash"
+                                      #,roads
+                                      )
             folium_static(m, width = 800)
             #Need to add the download option here!
             if st.button("Save Map", key = 'Overall'):
@@ -147,8 +149,9 @@ def app_review(session_state):
         for _, route in scenario['SolSummary_DF'].iterrows(): 
             display_route(route, 
                             scenario['SolDetail_DF'][scenario['SolDetail_DF']["route"] == route["route"]], 
-                            scenario['Loading Plan'][scenario['Loading Plan']["Dispatch No"] == route["route"]],
-                            roads)
+                            scenario['Loading Plan'][scenario['Loading Plan']["Dispatch No"] == route["route"]]
+                            #,roads
+                            )
             if st.button("Save Map", key = route):
                 m.save(f"./data/{session_state.country}/{scenario['Scenario']}_{route}_Route.html")
                 st.markdown(f"**Map saved as an HTML: {scenario['Scenario']}__{route}_Route.html**")

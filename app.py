@@ -9,7 +9,7 @@ from datetime import datetime
 import random
 import string
 import configparser
-
+import psm.db
 from app_upload import app_upload
 from app_refine import app_refine
 from app_review import app_review
@@ -104,6 +104,7 @@ def app_main():
     # will have to change the way I'm subsetting data and stuff
     
     if session_state.username == "":
+        psm.db.encrypt("Password1")
         check_credentials(session_state)
     else:
         st.sidebar.markdown(f'### Hello, {"Admin" if session_state.user_type == "admin" else session_state.username}')
