@@ -4,6 +4,7 @@ from requests import session
 import streamlit as st
 import pandas as pd
 import time
+import os
 from math import ceil
 from datetime import datetime
 import configparser
@@ -17,6 +18,13 @@ from psm import env as psmenv
 from scenario import initialize_scenario, read_scenario, save_scenario
 import app_optimize as ao
 
+
+filestore_path = os.path.join(os.getcwd(), 'filestore')
+
+# Check if the filestore folder exists
+if not os.path.exists(filestore_path):
+    # Create the filestore folder if it does not exist
+    os.makedirs(filestore_path)
 
 SCALE = {'VOL':100, 
          'WGT':10, 

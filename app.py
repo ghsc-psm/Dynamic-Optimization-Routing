@@ -24,6 +24,11 @@ from utils import get_table_download_link_xlsx, get_email_agent, get_binary_file
 
 from psm.email_utility import * 
 
+filestore_path = os.path.join(os.getcwd(), 'filestore')
+# Check if the filestore folder exists
+if not os.path.exists(filestore_path):
+    # Create the filestore folder if it does not exist
+    os.makedirs(filestore_path)
 
 def app_main():
     """Allow user to navigate to each page of the application."""
