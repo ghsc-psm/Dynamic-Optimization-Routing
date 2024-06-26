@@ -1,4 +1,4 @@
-absl-py==1.0.0
+absl-py==2.0.0
 altair==4.2.0
 argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
@@ -71,7 +71,7 @@ Pillow==9.1.1
 polyline==1.4.0
 prometheus-client==0.14.1
 prompt-toolkit==3.0.29
-protobuf==3.20.1
+protobuf
 psutil==5.9.0
 pure-eval==0.2.2
 pyarrow==8.0.0
